@@ -1,0 +1,18 @@
+services:
+  app:
+    build: ./app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/html
+    environment:
+      DB_HOST: database
+      DB_NAME: php_app
+      DB_USER: php_user
+      DB_PASSWORD: development_password
+    networks:
+      - app-testing
+
+networks:
+  app-testing:
+    external: true

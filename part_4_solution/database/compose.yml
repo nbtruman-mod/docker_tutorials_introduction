@@ -1,0 +1,24 @@
+services:
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: php_app
+      MYSQL_USER: php_user
+      MYSQL_PASSWORD: development_password
+      MYSQL_ROOT_PASSWORD: development_root_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    networks:
+      app-testing:
+        aliases:
+          - database
+
+volumes:
+  db_data:
+    external: true
+    name: part_4_solution_db_data
+
+networks:
+  app-testing:
+    external: true
